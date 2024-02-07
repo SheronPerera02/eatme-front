@@ -1,5 +1,5 @@
 const Menu = () => {
-  return <div className="font-plex_sans">Menug</div>;
+  return <div className="font-plex_sans">Menu</div>;
 };
 
 export default Menu;

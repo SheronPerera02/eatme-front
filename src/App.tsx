@@ -1,10 +1,10 @@
 import Layout from "./components/Layout/Layout";
-import Auth from "./pages/Auth/Auth";
+import Menu from "./pages/Menu/Menu";
 
 const App = () => {
   return (
     <Layout>
-      <Auth />
+      <Menu />
     </Layout>
   );
 };
