@@ -5,7 +5,7 @@ const Layout = ({ children }: PropsWithChildren) => {
   return (
     <div className="min-h-screen min-w-full pt-[73px]">
       <Header />
-      {children}
+      <div className="h-[calc(100vh-73px)]">{children}</div>
     </div>
   );
 };

@@ -1,9 +1,10 @@
 import Layout from "./components/Layout/Layout";
+import Auth from "./pages/Auth/Auth";
 
 const App = () => {
   return (
     <Layout>
-      <p>hello</p>
+      <Auth />
     </Layout>
   );
 };
