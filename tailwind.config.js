@@ -6,8 +6,13 @@ export default {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
         plex_sans: ["IBM Plex Sans", "sans-serif"],
+        pt_sans: ["Pt Sans", "sans-serif"],
       },
     },
   },
-  plugins: [],
+  corePlugins: {
+    aspectRatio: false,
+  },
+  // eslint-disable-next-line no-undef
+  plugins: [require("@tailwindcss/aspect-ratio")],
 };
