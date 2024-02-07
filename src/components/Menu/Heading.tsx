@@ -8,7 +8,7 @@ const Heading = () => {
   return (
     <>
       <div className="flex flex-col py-5 px-[3%] gap-4">
-        <div className="flex items-center gap-2">
+        <div className="cursor-pointer flex items-center gap-2">
           <IoArrowBack color="#00ccbc" size={20} />
           <span className="font-plex_sans text-[#00ccbc]">Back</span>
         </div>
@@ -33,7 +33,7 @@ const Heading = () => {
               </span>
             </div>
             <div className="flex flex-col gap-3">
-              <div className="flex items-center gap-3">
+              <div className="cursor-pointer flex items-center gap-3">
                 <GoInfo color="#acaeae" size={20} />
                 <div className="flex flex-col">
                   <span className="font-plex_sans text-[#2e3333]">Info</span>
@@ -43,7 +43,7 @@ const Heading = () => {
                 </div>
                 <IoIosArrowForward color="#00ccbc" size={20} />
               </div>
-              <div className="flex items-center gap-3">
+              <div className="cursor-pointer flex items-center gap-3">
                 <GoStarFill color="#4d7c1b" size={20} />
                 <div className="flex flex-col">
                   <span className="font-plex_sans text-[#4d7c1b]">

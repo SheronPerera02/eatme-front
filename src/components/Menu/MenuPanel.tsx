@@ -1,15 +1,38 @@
 import { GoStarFill } from "react-icons/go";
 import { FaPlus } from "react-icons/fa6";
 import { twMerge } from "tailwind-merge";
+import BasketCard from "./BasketCard";
 
 const MenuPanel = () => {
   return (
-    <div className="grid grid-cols-3 gap-4 px-[3%] py-12">
-      <MenuItem />
-      <MenuItem />
-      <MenuItem />
-      <MenuItem />
-      <MenuItem />
+    <div className="flex px-[3%] py-12 gap-4 bg-[#f9fafa]">
+      <div className="grid grid-cols-3 gap-4 w-9/12">
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+        <MenuItem />
+      </div>
+      <div className="w-3/12">
+        <BasketCard />
+      </div>
     </div>
   );
 };
@@ -24,7 +47,7 @@ const MenuItem = () => {
     >
       <div className="flex flex-col overflow-ellipsis gap-1">
         <p className="font-plex_sans font-bold">The Italian</p>
-        <p className="flex text-sm items-start gap-1 text-[#585c5c]">
+        <p className="flex text-sm items-start gap-1 text-[#585c5c] max-h-20 w-full overflow-hidden">
           <span className="flex gap-1 items-center text-[#4d7c1b] whitespace-nowrap">
             {<GoStarFill color="#4d7c1b" size={18} />}
             Higly Rated
@@ -50,7 +73,7 @@ const MenuItem = () => {
       </div>
       <div
         className={twMerge(
-          "cursor-pointer w-[30%] h-full border-[1px] border-gray-200 rounded-[4px]",
+          "cursor-pointer w-56 h-full border-[1px] border-gray-200 rounded-[4px]",
           "flex justify-center items-center transition-all duration-200 hover:border-gray-300",
         )}
       >

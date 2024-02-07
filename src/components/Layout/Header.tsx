@@ -5,7 +5,7 @@ import { RiShoppingBasketLine } from "react-icons/ri";
 
 const Header = () => {
   return (
-    <div className="fixed top-0 w-full h-[73px] flex justify-between items-center  border-b-[1px] border-gray-200 px-[3%] bg-white">
+    <div className="fixed top-0 w-full h-[73px] flex justify-between items-center  border-b-[1px] border-gray-200 px-[3%] bg-white z-10">
       <div className="flex items-center">
         <GiKangaroo color="#00ccbc" size={50} />
         <p className="text-[#00ccbc] font-poppins font-semibold text-lg">
