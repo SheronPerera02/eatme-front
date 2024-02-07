@@ -5,7 +5,7 @@ export default {
     extend: {
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
-        merriweather: ["Merriweather", "sans-serif"],
+        plex_sans: ["IBM Plex Sans", "sans-serif"],
       },
     },
   },

@@ -1,5 +1,6 @@
 import { GiKangaroo } from "react-icons/gi";
 import { HiOutlineHome } from "react-icons/hi";
+import { FaRegUser } from "react-icons/fa";
 
 const Header = () => {
   return (
@@ -13,13 +14,11 @@ const Header = () => {
       <div className="flex gap-2">
         <button className="flex justify-center items-center gap-2 outline-none border-[1px] border-gray-200 px-3.5 py-2 rounded-[4px]">
           <HiOutlineHome color="#00ccbc" size={15} />
-          <span className="font-merriweather font-thin text-sm">
-            Sign up or log in
-          </span>
+          <span className="font-plex_sans">Sign up or log in</span>
         </button>
         <button className="flex justify-center items-center gap-2 outline-none border-[1px] border-gray-200 px-3.5 py-2 rounded-[4px]">
-          <HiOutlineHome color="#00ccbc" size={15} />
-          <span className="font-merriweather font-thin text-sm">Account</span>
+          <FaRegUser color="#00ccbc" size={14} />
+          <span className="font-plex_sans">Account</span>
         </button>
       </div>
     </div>

@@ -9,7 +9,7 @@ const Signin = () => {
   return (
     <div className="flex h-full justify-center items-center">
       <div className="w-[20%] h-max  flex flex-col gap-5">
-        <p className="font-merriweather text-lg font-bold">Sign up or log in</p>
+        <p className="font-plex_sans text-xl font-bold">Sign up or log in</p>
         {continueWithEmail ? (
           <AuthForm />
         ) : (
@@ -29,14 +29,14 @@ const Options = ({ onContinueWithEmail }: OptionsProps) => {
     <>
       <button className="flex justify-center items-center h-[48px] w-full gap-2 outline-none border-[1px] border-gray-400 px-3.5 py-2 rounded-[4px]">
         <FcGoogle color="#00ccbc" size={15} />
-        <span className="font-merriweather text-sm font-bold">
+        <span className="font-plex_sans text-sm font-bold">
           Continue with Google
         </span>
       </button>
       <div className="flex flex-col gap-4">
         <div className="flex items-center gap-4">
           <div className="w-full h-[1px] bg-gray-200" />
-          <span className="font-merriweather text-sm">or</span>
+          <span className="font-plex_sans text-sm">or</span>
           <div className="w-full h-[1px] bg-gray-200" />
         </div>
         <button
@@ -44,7 +44,7 @@ const Options = ({ onContinueWithEmail }: OptionsProps) => {
           onClick={() => onContinueWithEmail()}
         >
           <MdMailOutline color="#ffffff" size={15} />
-          <span className="font-merriweather text-sm font-bold text-white">
+          <span className="font-plex_sans text-sm font-bold text-white">
             Continue with email
           </span>
         </button>
@@ -60,10 +60,10 @@ const AuthForm = () => {
     <>
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
-          <p className="font-merriweather text-sm">Email address</p>
+          <p className="font-plex_sans text-sm">Email address</p>
           <div className="flex items-center h-[48px] w-full border-[1px] border-gray-400 px-3.5 py-2 rounded-[4px]">
             <input
-              className="outline-none font-merriweather text-sm"
+              className="outline-none font-plex_sans text-sm"
               placeholder="e.g. name@example.com"
             />
           </div>
@@ -74,10 +74,10 @@ const AuthForm = () => {
             mode ? "max-h-96" : "",
           )}
         >
-          <p className="font-merriweather text-sm">Password</p>
+          <p className="font-plex_sans text-sm">Password</p>
           <div className="flex items-center h-[48px] w-full border-[1px] border-gray-400 px-3.5 py-2 rounded-[4px]">
             <input
-              className="outline-none font-merriweather text-sm"
+              className="outline-none font-plex_sans text-sm"
               type="password"
             />
           </div>
@@ -93,7 +93,7 @@ const AuthForm = () => {
           )}
           onClick={() => setMode("signin")}
         >
-          <span className="font-merriweather text-sm font-bold text-white">
+          <span className="font-plex_sans text-sm font-bold text-white">
             Sign in
           </span>
         </button>
@@ -106,7 +106,7 @@ const AuthForm = () => {
           )}
           onClick={() => setMode("signup")}
         >
-          <span className="font-merriweather text-sm font-bold text-[#00ccbc] breakkee">
+          <span className="font-plex_sans text-sm font-bold text-[#00ccbc] breakkee">
             Sign up
           </span>
         </button>
