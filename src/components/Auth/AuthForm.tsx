@@ -1,8 +1,29 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { twMerge } from "tailwind-merge";
+import { signin, signup } from "../../state/slices/auth/actions";
+import { AppDispatch } from "../../state";
 
 const AuthForm = () => {
   const [mode, setMode] = useState<"signin" | "signup" | null>(null);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleSubmit = (action: "signin" | "signup") => {
+    if (action !== mode) return setMode(action);
+
+    if (action === "signin") {
+      return dispatch(signin({ email, password }));
+    }
+
+    dispatch(signup({ email, password, onSuccess: clearForm }));
+  };
+
+  const clearForm = () => {
+    setEmail("");
+    setPassword("");
+  };
 
   return (
     <>
@@ -13,6 +34,8 @@ const AuthForm = () => {
             <input
               className="outline-none font-plex_sans text-sm"
               placeholder="e.g. name@example.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
         </div>
@@ -27,6 +50,8 @@ const AuthForm = () => {
             <input
               className="outline-none font-plex_sans text-sm"
               type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
         </div>
@@ -39,7 +64,7 @@ const AuthForm = () => {
             "transition-all duration-500 min-w-max",
             !mode || mode === "signin" ? "flex-1" : "",
           )}
-          onClick={() => setMode("signin")}
+          onClick={() => handleSubmit("signin")}
         >
           <span className="font-plex_sans text-sm font-bold text-white">
             Sign in
@@ -52,7 +77,7 @@ const AuthForm = () => {
             "transition-all duration-500 min-w-max",
             !mode || mode === "signup" ? "flex-1" : "",
           )}
-          onClick={() => setMode("signup")}
+          onClick={() => handleSubmit("signup")}
         >
           <span className="font-plex_sans text-sm font-bold text-[#00ccbc] breakkee">
             Sign up

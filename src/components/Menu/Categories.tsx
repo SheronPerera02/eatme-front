@@ -17,7 +17,10 @@ const Categories = () => {
       {categories.map((category, index) => {
         if (index === 0)
           return (
-            <span className="cursor-pointer bg-[#00ccbc] rounded-full px-4 py-0.5 text-sm font-bold text-white">
+            <span
+              key={index}
+              className="cursor-pointer bg-[#00ccbc] rounded-full px-4 py-0.5 text-sm font-bold text-white"
+            >
               {category}
             </span>
           );
