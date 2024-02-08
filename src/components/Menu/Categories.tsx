@@ -13,7 +13,7 @@ const Categories = () => {
     "Smoothies, shakes & juice",
   ];
   return (
-    <div className="flex py-6 gap-4 border-y-[1px] border-gray-200 px-[3%]">
+    <div className="flex py-6 gap-4 border-y-[1px] border-gray-200 px-[3%] sticky top-[72px] bg-white z-10">
       {categories.map((category, index) => {
         if (index === 0)
           return (
