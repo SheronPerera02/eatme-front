@@ -3,8 +3,13 @@ import { GoInfo } from "react-icons/go";
 import { IoIosArrowForward } from "react-icons/io";
 import { GoStarFill } from "react-icons/go";
 import Categories from "./Categories";
+import { Category } from "../../types";
 
-const Heading = () => {
+type HeadingProps = {
+  categories: Category[];
+};
+
+const Heading = ({ categories }: HeadingProps) => {
   return (
     <>
       <div className="flex flex-col py-5 px-[3%] gap-4">
@@ -59,7 +64,7 @@ const Heading = () => {
           </div>
         </div>
       </div>
-      <Categories />
+      <Categories categories={categories}/>
     </>
   );
 };
