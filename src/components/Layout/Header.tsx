@@ -15,7 +15,8 @@ const Header = () => {
   return (
     <div
       className={twMerge(
-        "fixed top-0 w-full h-[60px] flex items-center justify-between border-b-[1px] border-gray-200 px-[3%] bg-white z-10 lg:h-[73px]",
+        "fixed top-0 w-full h-[60px] flex items-center justify-between border-b-[1px] border-gray-200 bg-white z-10 lg:h-[73px] lg:px-[3%]",
+        !access_token ? "px-20" : "px-[3%]",
       )}
       style={
         !access_token ? { justifyContent: "center", gap: "35%" } : undefined
@@ -28,9 +29,11 @@ const Header = () => {
             deliveroo
           </p>
         </div>
-        <button className="h-[42px] justify-center items-center gap-2 outline-none border-[1px] border-gray-200 px-3.5 py-2 rounded-[4px] lg:hidden">
-          <FiSearch color="#00ccbc" size={15} />
-        </button>
+        {access_token ? (
+          <button className="h-[42px] justify-center items-center gap-2 outline-none border-[1px] border-gray-200 px-3.5 py-2 rounded-[4px] lg:hidden">
+            <FiSearch color="#00ccbc" size={15} />
+          </button>
+        ) : null}
       </div>
 
       {access_token ? (
@@ -48,9 +51,14 @@ const Header = () => {
             <span className="font-plex_sans">£0.00</span>
           </button>
         ) : null}
-        <button className="hidden justify-center items-center gap-2 outline-none border-[1px] border-gray-200 px-3.5 py-2 rounded-[4px] lg:flex">
+        <button
+          className={twMerge(
+            "flex justify-center items-center gap-2 outline-none border-[1px] border-gray-200 px-3.5 py-2 rounded-[4px] lg:flex",
+            access_token ? "hidden lg:flex" : "",
+          )}
+        >
           <HiOutlineHome color="#00ccbc" size={15} />
-          <span className="font-plex_sans">Sign up or log in</span>
+          <span className="font-plex_sans text-nowrap">Sign up or log in</span>
         </button>
         {access_token ? (
           <button className="flex justify-center items-center gap-2 outline-none border-[1px] border-gray-200 px-3.5 py-2 rounded-[4px]">
