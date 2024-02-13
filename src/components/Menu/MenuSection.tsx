@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { GoStarFill } from "react-icons/go";
 import { FaPlus } from "react-icons/fa6";
 import { twMerge } from "tailwind-merge";
 import { Category, Dish } from "../../types";
@@ -44,7 +43,7 @@ const MenuSection = ({ category }: MenuSectionProps) => {
       <p className="font-pt_sans text-2xl font-bold text-[#2e3333]">
         {category.name}
       </p>
-      <div className="grid grid-cols-3 gap-4 w-full">
+      <div className="grid grid-cols-1 gap-4 w-full lg:grid-cols-2 2xl:grid-cols-3">
         {category.dishes.map((dish, index) => {
           return <MenuItem key={index} dish={dish} />;
         })}
@@ -67,38 +66,36 @@ const MenuItem = ({ dish }: MenuItemProps) => {
     >
       <div className="flex flex-col overflow-ellipsis gap-1">
         <p className="font-plex_sans font-bold">{dish.name}</p>
-        <p className="flex text-sm items-start gap-1 text-[#585c5c] max-h-20 w-full overflow-hidden">
-          <span className="flex gap-1 items-center text-[#4d7c1b] whitespace-nowrap">
-            {<GoStarFill color="#4d7c1b" size={18} />}
-            Higly Rated
-          </span>
-          {` · ${dish.description}`}
+        <p className="flex text-sm items-start gap-1 text-[#585c5c] max-h-10 w-full overflow-hidden">
+          {dish.description}
         </p>
-        <span className="flex items-center gap-1 text-[#2e3333]">
+        <span className="flex items-center gap-1 text-[#2e3333] text-sm lg:text-base">
           {dish.calories} kcal
         </span>
-        <p className="flex items-center gap-1 text-[#2e3333]">
+        <p className="flex items-center gap-1 text-[#2e3333] text-sm lg:text-base">
           £{dish.price}
           <span className="flex gap-1 items-center text-[#f08308] whitespace-nowrap">
             {" · "}Popular
           </span>
         </p>
       </div>
-      <div className="h-full w-full">
-        <div className="aspect-w-1 aspect-h-1">
-          <img
-            src="https://www.bluristorante.com/wp-content/uploads/2019/03/9-Traditional-Italian-Food-Dishes-You-Will-Love-1080x700.jpg"
-            className="object-cover"
-          />
+      <div className="relative flex gap-4 w-max h-max">
+        <div className="h-28 w-28">
+          <div className="aspect-w-1 aspect-h-1">
+            <img
+              src="https://www.bluristorante.com/wp-content/uploads/2019/03/9-Traditional-Italian-Food-Dishes-You-Will-Love-1080x700.jpg"
+              className="object-cover"
+            />
+          </div>
         </div>
-      </div>
-      <div
-        className={twMerge(
-          "cursor-pointer w-56 h-full border-[1px] border-gray-200 rounded-[4px]",
-          "flex justify-center items-center transition-all duration-200 hover:border-gray-300",
-        )}
-      >
-        <FaPlus color="#00ccbc" size={20} />
+        <div
+          className={twMerge(
+            "cursor-pointer flex-1 px-2 border-[1px] border-gray-200 rounded-[4px]",
+            "flex justify-center items-center transition-all duration-200 hover:border-gray-300",
+          )}
+        >
+          <FaPlus color="#00ccbc" size={20} />
+        </div>
       </div>
     </div>
   );

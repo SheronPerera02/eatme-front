@@ -22,7 +22,7 @@ const Categories = ({ categories }: CategoriesProps) => {
   };
 
   return (
-    <div className="no-scrollbar overflow-x-scroll scroll-bar flex py-6 gap-4 border-y-[1px] border-gray-200 px-[3%] sticky top-[72px] bg-white z-10">
+    <div className="no-scrollbar overflow-x-scroll scroll-bar flex py-6 gap-4 border-y-[1px] border-gray-200 px-[3%] sticky top-[59px] bg-white z-10 lg:top-[72px]">
       {categories.map((category, index) => {
         return (
           <div
