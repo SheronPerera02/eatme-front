@@ -24,7 +24,10 @@ export const signup = createAsyncThunk<
 );
 
 export const signin = createAsyncThunk<
-  AxiosResponse<{ message: string; data: { accessToken: string } }>,
+  AxiosResponse<{
+    message: string;
+    data: { accessToken: string; refreshToken: string };
+  }>,
   { email: string; password: string },
   { rejectValue: { message: string } }
 >("auth/signin", async ({ email, password }, { rejectWithValue }) => {

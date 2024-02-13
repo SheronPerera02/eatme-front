@@ -4,11 +4,13 @@ import { signin, signup } from "./actions";
 import { toast } from "react-toastify";
 
 export type AuthState = {
-  access_token: string | null;
+  accessToken: string | null;
+  refreshToken: string | null;
 };
 
 const initialState: AuthState = {
-  access_token: null,
+  accessToken: null,
+  refreshToken: null,
 };
 
 export const authSlice = createSlice({
@@ -16,7 +18,10 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     setAccessToken: (state, action: PayloadAction<string | null>) => {
-      state.access_token = action.payload;
+      state.accessToken = action.payload;
+    },
+    setRefreshToken: (state, action: PayloadAction<string | null>) => {
+      state.refreshToken = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -28,9 +33,13 @@ export const authSlice = createSlice({
     });
     builder.addCase(signin.fulfilled, (state, action) => {
       const accessToken = action.payload.data.data.accessToken;
+      const refreshToken = action.payload.data.data.refreshToken;
       const message = action.payload.data.message;
-      localStorage.setItem("access_token", accessToken);
-      state.access_token = accessToken;
+      localStorage.setItem(
+        "auth",
+        JSON.stringify({ accessToken, refreshToken }),
+      );
+      state.accessToken = accessToken;
       toast.success(message);
     });
     builder.addCase(signin.rejected, (_, action) => {
@@ -39,6 +48,6 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setAccessToken } = authSlice.actions;
+export const { setAccessToken, setRefreshToken } = authSlice.actions;
 
 export default authSlice.reducer;

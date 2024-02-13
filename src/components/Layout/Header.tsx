@@ -8,18 +8,18 @@ import { twMerge } from "tailwind-merge";
 import { FiSearch } from "react-icons/fi";
 
 const Header = () => {
-  const access_token = useSelector(
-    (state: RootState) => state.auth.access_token,
+  const accessToken = useSelector(
+    (state: RootState) => state.auth.accessToken,
   );
 
   return (
     <div
       className={twMerge(
         "fixed top-0 w-full h-[60px] flex items-center justify-between border-b-[1px] border-gray-200 bg-white z-10 lg:h-[73px] lg:px-[3%]",
-        !access_token ? "px-20" : "px-[3%]",
+        !accessToken ? "px-20" : "px-[3%]",
       )}
       style={
-        !access_token ? { justifyContent: "center", gap: "35%" } : undefined
+        !accessToken ? { justifyContent: "center", gap: "35%" } : undefined
       }
     >
       <div className="flex gap-4 items-center">
@@ -29,14 +29,14 @@ const Header = () => {
             deliveroo
           </p>
         </div>
-        {access_token ? (
+        {accessToken ? (
           <button className="h-[42px] justify-center items-center gap-2 outline-none border-[1px] border-gray-200 px-3.5 py-2 rounded-[4px] lg:hidden">
             <FiSearch color="#00ccbc" size={15} />
           </button>
         ) : null}
       </div>
 
-      {access_token ? (
+      {accessToken ? (
         <div className="hidden items-center h-[46px] border-[1px] border-gray-200 px-3.5 py-2 rounded-[4px] bg-[#f5f5f5] lg:flex lg:w-[50%] 2xl:w-[35%]">
           <input
             className="outline-none font-plex_sans w-full bg-transparent"
@@ -45,7 +45,7 @@ const Header = () => {
         </div>
       ) : null}
       <div className="flex gap-3">
-        {access_token ? (
+        {accessToken ? (
           <button className="hidden justify-center items-center gap-2 outline-none border-[1px] border-gray-200 px-3.5 py-2 rounded-[4px] lg:flex">
             <RiShoppingBasketLine color="#00ccbc" size={15} />
             <span className="font-plex_sans">£0.00</span>
@@ -54,13 +54,13 @@ const Header = () => {
         <button
           className={twMerge(
             "flex justify-center items-center gap-2 outline-none border-[1px] border-gray-200 px-3.5 py-2 rounded-[4px] lg:flex",
-            access_token ? "hidden lg:flex" : "",
+            accessToken ? "hidden lg:flex" : "",
           )}
         >
           <HiOutlineHome color="#00ccbc" size={15} />
           <span className="font-plex_sans text-nowrap">Sign up or log in</span>
         </button>
-        {access_token ? (
+        {accessToken ? (
           <button className="flex justify-center items-center gap-2 outline-none border-[1px] border-gray-200 px-3.5 py-2 rounded-[4px]">
             <FaRegUser color="#00ccbc" size={14} />
             <span className="font-plex_sans">Account</span>

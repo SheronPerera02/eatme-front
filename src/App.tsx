@@ -5,33 +5,39 @@ import { AppDispatch, RootState } from "./state";
 import Menu from "./pages/Menu/Menu";
 import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
-import { setAccessToken } from "./state/slices/auth";
+import { setAccessToken, setRefreshToken } from "./state/slices/auth";
 
 const App = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const access_token = useSelector(
-    (state: RootState) => state.auth.access_token,
-  );
+  const accessToken = useSelector((state: RootState) => state.auth.accessToken);
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     const accessToken = searchParams.get("accessToken");
-    if (accessToken) {
+    const refreshToken = searchParams.get("refreshToken");
+    if (accessToken && refreshToken) {
       setSearchParams({});
-      localStorage.setItem("access_token", accessToken);
+      localStorage.setItem(
+        "auth",
+        JSON.stringify({ accessToken, refreshToken }),
+      );
       dispatch(setAccessToken(accessToken));
+      dispatch(setRefreshToken(refreshToken));
     } else {
       checkLocalStorage();
     }
   }, []);
 
   const checkLocalStorage = () => {
-    const accessToken = localStorage.getItem("access_token");
-    if (!accessToken) return;
+    const authData = localStorage.getItem("auth");
+    if (!authData) return;
+    const { accessToken, refreshToken } = JSON.parse(authData as string);
+    if (!accessToken || !refreshToken) return;
     dispatch(setAccessToken(accessToken));
+    dispatch(setRefreshToken(refreshToken));
   };
 
-  return <Layout>{access_token ? <Menu /> : <Auth />}</Layout>;
+  return <Layout>{accessToken ? <Menu /> : <Auth />}</Layout>;
 };
 
 export default App;
