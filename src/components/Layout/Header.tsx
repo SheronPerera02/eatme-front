@@ -9,7 +9,7 @@ import { FiSearch } from "react-icons/fi";
 import { logout } from "../../state/slices/auth/actions";
 
 const Header = () => {
-  const accessToken = useSelector((state: RootState) => state.auth.accessToken);
+  const auth = useSelector((state: RootState) => state.auth.auth);
   const dispatch = useDispatch<AppDispatch>();
 
   const handleLogout = () => {
@@ -20,10 +20,12 @@ const Header = () => {
     <div
       className={twMerge(
         "fixed top-0 w-full h-[60px] flex items-center justify-between border-b-[1px] border-gray-200 bg-white z-10 lg:h-[73px] lg:px-[3%]",
-        !accessToken ? "px-20" : "px-[3%]",
+        !auth?.accessToken ? "px-20" : "px-[3%]",
       )}
       style={
-        !accessToken ? { justifyContent: "center", gap: "35%" } : undefined
+        !auth?.accessToken
+          ? { justifyContent: "center", gap: "35%" }
+          : undefined
       }
     >
       <div className="flex gap-4 items-center">
@@ -33,14 +35,14 @@ const Header = () => {
             deliveroo
           </p>
         </div>
-        {accessToken ? (
+        {auth?.accessToken ? (
           <button className="h-[42px] justify-center items-center gap-2 outline-none border-[1px] border-gray-200 px-3.5 py-2 rounded-[4px] lg:hidden">
             <FiSearch color="#00ccbc" size={15} />
           </button>
         ) : null}
       </div>
 
-      {accessToken ? (
+      {auth?.accessToken ? (
         <div className="hidden items-center h-[46px] border-[1px] border-gray-200 px-3.5 py-2 rounded-[4px] bg-[#f5f5f5] lg:flex lg:w-[50%] 2xl:w-[35%]">
           <input
             className="outline-none font-plex_sans w-full bg-transparent"
@@ -49,7 +51,7 @@ const Header = () => {
         </div>
       ) : null}
       <div className="flex gap-3">
-        {accessToken ? (
+        {auth?.accessToken ? (
           <button className="hidden justify-center items-center gap-2 outline-none border-[1px] border-gray-200 px-3.5 py-2 rounded-[4px] lg:flex">
             <RiShoppingBasketLine color="#00ccbc" size={15} />
             <span className="font-plex_sans">£0.00</span>
@@ -58,13 +60,13 @@ const Header = () => {
         <button
           className={twMerge(
             "flex justify-center items-center gap-2 outline-none border-[1px] border-gray-200 px-3.5 py-2 rounded-[4px] lg:flex",
-            accessToken ? "hidden lg:flex" : "",
+            auth?.accessToken ? "hidden lg:flex" : "",
           )}
         >
           <HiOutlineHome color="#00ccbc" size={15} />
           <span className="font-plex_sans text-nowrap">Sign up or log in</span>
         </button>
-        {accessToken ? (
+        {auth?.accessToken ? (
           <button
             className="flex justify-center items-center gap-2 outline-none border-[1px] border-gray-200 px-3.5 py-2 rounded-[4px]"
             onClick={handleLogout}

@@ -26,7 +26,7 @@ export const signup = createAsyncThunk<
 export const signin = createAsyncThunk<
   AxiosResponse<{
     message: string;
-    data: { accessToken: string; refreshToken: string };
+    data: { accessToken: string; expiration: number; refreshToken: string };
   }>,
   { email: string; password: string },
   { rejectValue: { message: string } }

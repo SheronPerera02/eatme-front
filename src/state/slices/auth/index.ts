@@ -4,24 +4,30 @@ import { logout, signin, signup } from "./actions";
 import { toast } from "react-toastify";
 
 export type AuthState = {
-  accessToken: string | null;
-  refreshToken: string | null;
+  auth: {
+    accessToken: string;
+    expiration: number;
+    refreshToken: string;
+  } | null;
 };
 
 const initialState: AuthState = {
-  accessToken: null,
-  refreshToken: null,
+  auth: null,
 };
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    setAccessToken: (state, action: PayloadAction<string | null>) => {
-      state.accessToken = action.payload;
-    },
-    setRefreshToken: (state, action: PayloadAction<string | null>) => {
-      state.refreshToken = action.payload;
+    setAuthData: (
+      state,
+      action: PayloadAction<{
+        accessToken: string;
+        expiration: number;
+        refreshToken: string;
+      } | null>,
+    ) => {
+      state.auth = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -32,15 +38,14 @@ export const authSlice = createSlice({
       toast.error(action.payload?.message);
     });
     builder.addCase(signin.fulfilled, (state, action) => {
-      const accessToken = action.payload.data.data.accessToken;
-      const refreshToken = action.payload.data.data.refreshToken;
+      const { accessToken, expiration, refreshToken } =
+        action.payload.data.data;
       const message = action.payload.data.message;
       localStorage.setItem(
         "auth",
-        JSON.stringify({ accessToken, refreshToken }),
+        JSON.stringify({ accessToken, expiration, refreshToken }),
       );
-      state.accessToken = accessToken;
-      state.refreshToken = refreshToken;
+      state.auth = { accessToken, expiration, refreshToken };
       toast.success(message);
     });
     builder.addCase(signin.rejected, (_, action) => {
@@ -48,12 +53,11 @@ export const authSlice = createSlice({
     });
     builder.addCase(logout, (state) => {
       localStorage.removeItem("auth");
-      state.accessToken = null;
-      state.refreshToken = null;
+      state.auth = null;
     });
   },
 });
 
-export const { setAccessToken, setRefreshToken } = authSlice.actions;
+export const { setAuthData } = authSlice.actions;
 
 export default authSlice.reducer;

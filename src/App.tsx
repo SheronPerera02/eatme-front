@@ -5,24 +5,30 @@ import { AppDispatch, RootState } from "./state";
 import Menu from "./pages/Menu/Menu";
 import { useSearchParams } from "react-router-dom";
 import { useEffect } from "react";
-import { setAccessToken, setRefreshToken } from "./state/slices/auth";
+import { setAuthData } from "./state/slices/auth";
 
 const App = () => {
   const [searchParams, setSearchParams] = useSearchParams();
-  const accessToken = useSelector((state: RootState) => state.auth.accessToken);
+  const auth = useSelector((state: RootState) => state.auth.auth);
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     const accessToken = searchParams.get("accessToken");
     const refreshToken = searchParams.get("refreshToken");
-    if (accessToken && refreshToken) {
+    const expiration = searchParams.get("expiration");
+    if (accessToken && refreshToken && expiration) {
       setSearchParams({});
       localStorage.setItem(
         "auth",
-        JSON.stringify({ accessToken, refreshToken }),
+        JSON.stringify({ accessToken, expiration, refreshToken }),
       );
-      dispatch(setAccessToken(accessToken));
-      dispatch(setRefreshToken(refreshToken));
+      dispatch(
+        setAuthData({
+          accessToken,
+          expiration: Number(expiration),
+          refreshToken,
+        }),
+      );
     } else {
       checkLocalStorage();
     }
@@ -31,13 +37,20 @@ const App = () => {
   const checkLocalStorage = () => {
     const authData = localStorage.getItem("auth");
     if (!authData) return;
-    const { accessToken, refreshToken } = JSON.parse(authData as string);
-    if (!accessToken || !refreshToken) return;
-    dispatch(setAccessToken(accessToken));
-    dispatch(setRefreshToken(refreshToken));
+    const { accessToken, expiration, refreshToken } = JSON.parse(
+      authData as string,
+    );
+    if (!accessToken || !expiration || !refreshToken) return;
+    dispatch(
+      setAuthData({
+        accessToken,
+        expiration: Number(expiration),
+        refreshToken,
+      }),
+    );
   };
 
-  return <Layout>{accessToken ? <Menu /> : <Auth />}</Layout>;
+  return <Layout>{auth?.accessToken ? <Menu /> : <Auth />}</Layout>;
 };
 
 export default App;
