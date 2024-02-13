@@ -1,4 +1,4 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axiosInstance from "../../../axios";
 import { getRejectionValue } from "../../../shared/util";
 import { AxiosResponse } from "axios";
@@ -41,3 +41,5 @@ export const signin = createAsyncThunk<
     return rejectWithValue(getRejectionValue(e));
   }
 });
+
+export const logout = createAction("auth/logout");

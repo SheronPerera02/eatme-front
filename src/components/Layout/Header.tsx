@@ -2,15 +2,19 @@ import { GiKangaroo } from "react-icons/gi";
 import { HiOutlineHome } from "react-icons/hi";
 import { FaRegUser } from "react-icons/fa";
 import { RiShoppingBasketLine } from "react-icons/ri";
-import { useSelector } from "react-redux";
-import { RootState } from "../../state";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../../state";
 import { twMerge } from "tailwind-merge";
 import { FiSearch } from "react-icons/fi";
+import { logout } from "../../state/slices/auth/actions";
 
 const Header = () => {
-  const accessToken = useSelector(
-    (state: RootState) => state.auth.accessToken,
-  );
+  const accessToken = useSelector((state: RootState) => state.auth.accessToken);
+  const dispatch = useDispatch<AppDispatch>();
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
 
   return (
     <div
@@ -61,9 +65,12 @@ const Header = () => {
           <span className="font-plex_sans text-nowrap">Sign up or log in</span>
         </button>
         {accessToken ? (
-          <button className="flex justify-center items-center gap-2 outline-none border-[1px] border-gray-200 px-3.5 py-2 rounded-[4px]">
+          <button
+            className="flex justify-center items-center gap-2 outline-none border-[1px] border-gray-200 px-3.5 py-2 rounded-[4px]"
+            onClick={handleLogout}
+          >
             <FaRegUser color="#00ccbc" size={14} />
-            <span className="font-plex_sans">Account</span>
+            <span className="font-plex_sans">Logout</span>
           </button>
         ) : null}
       </div>

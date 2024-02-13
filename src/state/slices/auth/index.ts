@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { PayloadAction } from "@reduxjs/toolkit";
-import { signin, signup } from "./actions";
+import { logout, signin, signup } from "./actions";
 import { toast } from "react-toastify";
 
 export type AuthState = {
@@ -40,10 +40,16 @@ export const authSlice = createSlice({
         JSON.stringify({ accessToken, refreshToken }),
       );
       state.accessToken = accessToken;
+      state.refreshToken = refreshToken;
       toast.success(message);
     });
     builder.addCase(signin.rejected, (_, action) => {
       toast.error(action.payload?.message);
+    });
+    builder.addCase(logout, (state) => {
+      localStorage.removeItem("auth");
+      state.accessToken = null;
+      state.refreshToken = null;
     });
   },
 });
